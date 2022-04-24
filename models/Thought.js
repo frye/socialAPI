@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const Reaction = require('./Reaction');
+const reactionSchema = require('./Reaction');
 
 const thoughtSchema = new Schema({
   thoughtText: {
@@ -12,7 +12,12 @@ const thoughtSchema = new Schema({
     type: Date,
     default: Date.now,
     get: formatDate
-  }
+  },
+  username: {
+    type: String,
+    required: true
+  },
+  reactions: [reactionSchema]
 });
 
 function formatDate(createdAt) {
@@ -21,6 +26,10 @@ function formatDate(createdAt) {
   const timeString = date.toLocaleTimeString();
   return `${dateString} ${timeString}`;
 }
+
+thoughtSchema.virtual('reactionCount').get(function() {
+  return this.reactions.length;
+});
 
 const Thought = model('thought', thoughtSchema);
 
