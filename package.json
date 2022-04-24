@@ -1,0 +1,25 @@
+{
+  "name": "socialapi",
+  "version": "1.0.0",
+  "description": "Social media API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frye/socialAPI.git"
+  },
+  "author": "frye",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frye/socialAPI/issues"
+  },
+  "homepage": "https://github.com/frye/socialAPI#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.3.1",
+    "winston": "^3.7.2"
+  }
+}
