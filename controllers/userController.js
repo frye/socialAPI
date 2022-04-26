@@ -36,10 +36,27 @@ module.exports = {
     )
       .catch(err => res.status(500).json(err));
   },
-  addThought(){
-
+  addFriend(req, res){
+    User.findOneAndUpdate(
+      {_id: req.params.userId}, 
+      { $addToSet: { friends: req.params.friendId }}, 
+      {new: true}
+      )
+      .then((user) =>
+      !user 
+        ? res.json({message: 'User not found'})
+        : res.json(user))
+      .catch(err => res.status(500).json(err));
   },
-  removeThought(){
-
+  removeFriend(req, res){
+    User.findOneAndUpdate(
+      {_id: req.params.userId},
+      { $pull: { friends: req.params.friendId}})
+      .then((user) =>
+      !user
+        ? res.json({message: 'User not found'})
+        : res.json(user)
+      )
+      .catch(err => res.status(500).json(err));
   }
 };
