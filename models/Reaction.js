@@ -1,6 +1,6 @@
 const { default: mongoose } = require('mongoose');
 const { Schema, model } = require('mongoose');
-const formatDate = require('./utils/utils');
+const formatDate = require('../utils/utils');
 
 const Reaction = new Schema({
   reactionId: {
