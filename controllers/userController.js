@@ -33,21 +33,17 @@ module.exports = {
       .then((user) => {
         if (!user) {
           res.json({ message: 'User not found' });
-          console.log('User not found');
           return;
         }
         // Clean up friends arrays and remove this users id.
-        console.log('User found, deleting...');
         User.updateMany(
           { friends: { $all: [ req.params.userId ] } },
           { $pull: { friends: req.params.userId } }
         )
           .then(() => {
-            console.log('Friends updated');
             // Let's remove all the user's thoughts
             return Thought.deleteMany({ username: user.username })
               .then(() => {
-                console.log('Thoughts deleted');
                 res.json({ message: 'User deleted' });
               })
               .catch(err => res.status(500).json({ message: `Error clearing friends lists: ${err}` }));
