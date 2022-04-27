@@ -8,25 +8,29 @@ const userSchema = new Schema({
     unique: true,
     trimmed: true
   },
-  email: { 
+  email: {
     type: String,
     required: true,
     unique: true,
-    validate: [ validator.isEmail, 'Please enter a valid email' ]
-   },
-   thoughts: [
-     {
-       type: Schema.Types.ObjectId,
-        ref: 'Thought'
-      }
-    ],
-   friends: [{
-     type: Schema.Types.ObjectId,
-      ref: 'User'
-   }]
+    validate: [validator.isEmail, 'Please enter a valid email']
+  },
+  thoughts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Thought'
+    }
+  ],
+  friends: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+}, {
+  toJSON: {
+    virtuals: true
+  }
 });
 
-userSchema.virtual('friendCount').get(function() {
+userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });
 

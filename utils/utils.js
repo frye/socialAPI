@@ -1,8 +1,7 @@
+const moment = require('moment');
+
 function formatDate(createdAt) {
-  const date = new Date(createdAt);
-  const dateString = date.toDateString();
-  const timeString = date.toLocaleTimeString();
-  return `${dateString} ${timeString}`;
+    return moment(createdAt).format('MMMM Do YYYY, h:mm:ss a');
 }
 
 module.exports = formatDate;
