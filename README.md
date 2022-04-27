@@ -21,10 +21,7 @@ This basic social network backend API has been developed using node.js. It uses 
 ## How to use
 This is a backend API implementation, so once the application is started you would connect to it with something like postman or insomnia clients. See the [video walkthrough](https://youtu.be/5y60AiU3XPk) of the usage examples.
 
-
-
-
-
+![image](https://user-images.githubusercontent.com/98463/165461057-0aae16ab-cc40-4bbd-ad91-4c073c7c90b2.png)
 
 ## More information:
 - Through GitHub: [@frye](https://github.com/frye)
