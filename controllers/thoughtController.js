@@ -42,14 +42,15 @@ module.exports = {
   },
   deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
-    .then(
-      (thought) => {
-        return User.findOneAndUpdate(
-          { username: thought.username },
-          { $pull: { thoughts: thought._id } }          
-        )
-      }
-    )
+      .then(
+        (thought) => {
+          return User.findOneAndUpdate(
+            { username: thought.username },
+            { $pull: { thoughts: thought._id } },
+            { new: true }
+          )
+        }
+      )
       .then((user) =>
         !user
           ? res.json({ message: "User not found" })
@@ -63,12 +64,12 @@ module.exports = {
       { $addToSet: { reactions: req.body } },
       { new: true }
     )
-    .then((thought) => {
-      !thought
-        ? res.json({ message: "Thought not found" })
-        : res.json(thought);
-    })
-    .catch(err => res.status(500).json(err));
+      .then((thought) => {
+        !thought
+          ? res.json({ message: "Thought not found" })
+          : res.json(thought);
+      })
+      .catch(err => res.status(500).json(err));
   },
   deleteReaction(req, res) {
     Thought.findOneAndUpdate(
@@ -76,11 +77,11 @@ module.exports = {
       { $pull: { reactions: { reactionId: req.body.reactionId } } },
       { new: true }
     )
-    .then((thought) => {
-      !thought
-        ? res.json({ message: "Thought not found" })
-        : res.json(thought);
-    })
-    .catch(err => res.status(500).json(err));
+      .then((thought) => {
+        !thought
+          ? res.json({ message: "Thought not found" })
+          : res.json(thought);
+      })
+      .catch(err => res.status(500).json(err));
   }
 }
